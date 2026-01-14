@@ -16,7 +16,7 @@ export default function TestimonialCard({
   avatar,
 }: TestimonialCardProps) {
   return (
-    <div className='rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800'>
+    <div className='relative h-full rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800'>
       {/* Star Rating */}
       <div className='mb-4 flex gap-1'>
         {[...Array(5)].map((_, index) => {
@@ -42,12 +42,12 @@ export default function TestimonialCard({
       </div>
 
       {/* Quote */}
-      <blockquote className='mb-6 text-gray-700 italic dark:text-gray-300'>
+      <blockquote className='mb-14 text-gray-700 italic dark:text-gray-300'>
         "{quote}"
       </blockquote>
 
       {/* Author Info */}
-      <div className='flex items-center gap-4'>
+      <div className='absolute bottom-0 mb-6 flex items-center'>
         {avatar && (
           <img
             src={avatar}
@@ -55,7 +55,7 @@ export default function TestimonialCard({
             className='h-12 w-12 rounded-full object-cover'
           />
         )}
-        <div>
+        <div className='ps-2'>
           <h4 className='font-semibold text-gray-900 dark:text-white'>
             {authorName}
           </h4>
