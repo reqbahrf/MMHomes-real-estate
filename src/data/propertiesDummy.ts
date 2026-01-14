@@ -18,11 +18,12 @@ export const propertiesDummy: PropertyCardProps[] = [
   {
     image: house3,
     price: '$3,200,000',
-    title: 'Hillside Estate',
-    city: 'Brentwood',
-    address: '890 Hillcrest Road, Brentwood, CA 90049',
-    beds: 6,
-    baths: 5,
+    title: 'Highland Estate',
+    city: 'Beverly Hills',
+    address: '1234 Sunset Boulevard, Beverly Hills, CA 90210',
+
+    beds: 4,
+    baths: 3,
     size: '5,800 sq ft',
   },
   {
@@ -30,8 +31,8 @@ export const propertiesDummy: PropertyCardProps[] = [
     price: '$2,850,000',
     status: 'JUST LISTED',
     title: 'Modern Luxury Villa',
-    city: 'Beverly Hills',
-    address: '1234 Sunset Boulevard, Beverly Hills, CA 90210',
+    city: 'Brentwood',
+    address: '890 Hillcrest Road, Brentwood, CA 90049',
     beds: 5,
     baths: 4,
     size: '4,500 sq ft',

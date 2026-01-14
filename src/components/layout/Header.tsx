@@ -1,24 +1,46 @@
 import logo from '@/assets/logo.webp';
-import { useState } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'motion/react';
+import { useState, useRef } from 'react';
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+  const lastScrollY = useRef(0);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (latest > lastScrollY.current && latest > 100) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+    lastScrollY.current = latest;
+  });
+
   return (
-    <header className='flex justify-between bg-white dark:bg-gray-800 w-full h-[10dvh] fixed top-0 z-50 px-6'>
+    <motion.header
+      className='fixed top-0 z-50 flex h-[10dvh] w-full justify-between bg-white px-6 dark:bg-gray-800'
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: '-100%' },
+      }}
+      animate={hidden ? 'hidden' : 'visible'}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
       <div className='p-2'>
-        <div className='bg-white rounded-md p-1'>
+        <div className='p-1'>
           <img
             src={logo}
             alt='Logo'
-            className='w-full h-16 object-contain'
+            className='h-16 w-full object-contain dark:invert'
           />
         </div>
       </div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='md:hidden p-2 text-black dark:text-white'
+        className='p-2 text-black md:hidden dark:text-white'
       >
         <svg
-          className='w-8 h-8'
+          className='h-8 w-8'
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -43,14 +65,14 @@ export default function Header() {
       <nav
         className={`${
           isOpen ? 'flex' : 'hidden'
-        } items-center justify-center space-x-6 flex-col md:flex md:flex-row absolute md:static top-[10dvh] left-0 w-full md:w-auto bg-white dark:bg-gray-800 md:bg-transparent p-6 md:p-0 border-b md:border-none border-gray-200 dark:border-gray-700 space-y-4 md:space-y-0 md:space-x-6 transition-all duration-300 ease-in-out`}
+        } absolute top-[10dvh] left-0 w-full flex-col items-center justify-center space-y-4 space-x-6 border-b border-gray-200 bg-white p-6 transition-all duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:space-y-0 md:space-x-6 md:border-none md:bg-transparent md:p-0 dark:border-gray-700 dark:bg-gray-800`}
       >
-        <ul className='flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 '>
+        <ul className='flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-6'>
           {['Home', 'Listings', "Let's move", 'About Us'].map((item) => (
             <li key={item}>
               <a
-                href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
-                className='text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 text-sm md:text-lg font-bold md:font-normal'
+                href='#'
+                className={`${item === 'Home' ? 'font-bold!' : ''} text-sm font-bold text-black hover:text-blue-500 md:text-lg md:font-normal dark:text-white dark:hover:text-blue-400`}
               >
                 {item}
               </a>
@@ -58,6 +80,9 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-    </header>
+      <button className='my-4 hidden rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg shadow-blue-200 transition-all hover:bg-blue-700 md:block dark:bg-blue-500 dark:shadow-blue-900/20 dark:hover:bg-blue-600'>
+        Work with me
+      </button>
+    </motion.header>
   );
 }

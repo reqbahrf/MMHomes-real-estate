@@ -11,21 +11,21 @@ import logo from '@/assets/logo.webp';
 
 export default function Footer() {
   return (
-    <footer className='border-t border-gray-200 bg-white'>
+    <footer className='border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-[#111921]'>
       <div className='mx-auto max-w-7xl px-6 py-14'>
         <div className='grid gap-10 md:grid-cols-4'>
           {/* Brand */}
           <div className='space-y-4'>
             <div className='flex items-center gap-2 text-lg font-semibold'>
-              <div className='rounded-md bg-white p-1'>
+              <div className='p-1'>
                 <img
                   src={logo}
                   alt='Logo'
-                  className='h-16 w-full object-contain'
+                  className='h-16 w-full object-contain dark:invert'
                 />
               </div>
             </div>
-            <p className='text-sm text-gray-600'>
+            <p className='text-sm text-gray-600 dark:text-gray-300'>
               Redefining luxury real estate with integrity, discretion, and
               market expertise. Your partner in exceptional living.
             </p>
@@ -33,25 +33,25 @@ export default function Footer() {
             <div className='flex gap-3'>
               <a
                 href='https://www.facebook.com/MarciHomes/'
-                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white'
+                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white dark:bg-gray-800 dark:text-gray-300'
               >
                 <RiFacebookFill size={18} />
               </a>
               <a
                 href='https://www.instagram.com/marciandlauren_nvrealtors/'
-                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white'
+                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white dark:bg-gray-800 dark:text-gray-300'
               >
                 <RiInstagramLine size={18} />
               </a>
               <a
                 href='https://www.linkedin.com/in/marci-metzger-30642496/'
-                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white'
+                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white dark:bg-gray-800 dark:text-gray-300'
               >
                 <RiLinkedinLine size={18} />
               </a>
               <a
                 href='https://www.yelp.com/biz/xr3yQN_m2SgO0R_7S6p62w'
-                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white'
+                className='flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-blue-600 hover:text-white dark:bg-gray-800 dark:text-gray-300'
               >
                 <svg
                   viewBox='0 0 24 24'
@@ -69,8 +69,10 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <h4 className='mb-4 font-semibold text-gray-900'>Explore</h4>
-            <ul className='space-y-3 text-sm text-gray-600'>
+            <h4 className='mb-4 font-semibold text-gray-900 dark:text-white'>
+              Explore
+            </h4>
+            <ul className='space-y-3 text-sm text-gray-600 dark:text-gray-400'>
               {[
                 'Current Listings',
                 'Sold Properties',
@@ -79,7 +81,10 @@ export default function Footer() {
                 'Home Valuation',
               ].map((link) => (
                 <li key={link}>
-                  <a href='#' className='hover:text-blue-600'>
+                  <a
+                    href='#'
+                    className='hover:text-blue-600 dark:hover:text-blue-400'
+                  >
                     {link}
                   </a>
                 </li>
@@ -89,8 +94,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className='mb-4 font-semibold text-gray-900'>Contact</h4>
-            <ul className='space-y-4 text-sm text-gray-600'>
+            <h4 className='mb-4 font-semibold text-gray-900 dark:text-white'>
+              Contact
+            </h4>
+            <ul className='space-y-4 text-sm text-gray-600 dark:text-gray-400'>
               <li className='flex items-start gap-3'>
                 <RiMapPinLine className='mt-0.5 text-blue-600' size={18} />
                 <span>
@@ -119,8 +126,10 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className='mb-4 font-semibold text-gray-900'>Stay Connected</h4>
-            <p className='mb-4 text-sm text-gray-600'>
+            <h4 className='mb-4 font-semibold text-gray-900 dark:text-white'>
+              Stay Connected
+            </h4>
+            <p className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
               Receive off-market updates and exclusive invitations.
             </p>
             <form className='flex overflow-hidden rounded-lg border border-gray-300'>

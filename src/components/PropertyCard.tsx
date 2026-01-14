@@ -33,7 +33,7 @@ export default function PropertyCard({
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className='overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md dark:border-gray-800 dark:bg-gray-900'
+      className='overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md dark:border-gray-800 dark:bg-gray-800'
     >
       {/* Image */}
       <div className='relative'>
