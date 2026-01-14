@@ -1,12 +1,15 @@
 import './App.css';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <ThemeProvider>
+      <Layout>
+        <Home />
+      </Layout>
+    </ThemeProvider>
   );
 }
 
