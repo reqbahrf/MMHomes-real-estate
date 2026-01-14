@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import 'react-lazy-load-image-component/src/effects/blur.css';
 
+@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 :root {
   --background: #ffffff;
   --foreground: #171717;
