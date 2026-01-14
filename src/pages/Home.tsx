@@ -1,4 +1,10 @@
-import { RiHotelBedLine, RiDropLine } from '@remixicon/react';
+import {
+  RiHotelBedLine,
+  RiDropLine,
+  RiSearchLine,
+  RiExchangeLine,
+  RiBarChart2Line,
+} from '@remixicon/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import profile from '@/assets/profile.webp';
 import the_ridge from '@/assets/compliance/the_ridge.png';
@@ -6,6 +12,16 @@ import equal_housing from '@/assets/compliance/equal_housing.png';
 import realtor from '@/assets/compliance/realtor.jpg';
 import pahrump from '@/assets/compliance/pahrump.jpg';
 import featured_property from '@/assets/house3.jpg';
+import ServiceCard from '@/components/ServiceCard';
+import TestimonialCard from '@/components/TestimonialCard';
+import { testimonialDummy } from '@/data/testimonialDummy';
+import { servicesDummy } from '@/data/servicesDummy';
+
+const iconMap = {
+  RiSearchLine: <RiSearchLine />,
+  RiExchangeLine: <RiExchangeLine />,
+  RiBarChart2Line: <RiBarChart2Line />,
+};
 
 export default function Home() {
   return (
@@ -138,6 +154,62 @@ export default function Home() {
               effect='blur'
               className='h-16 w-auto object-contain opacity-70 grayscale filter transition-all duration-300 hover:opacity-100 hover:grayscale-0'
             />
+          </div>
+        </div>
+      </section>
+      <section
+        id='services'
+        className='border-t border-gray-50 bg-white px-6 py-24 lg:px-40 dark:border-gray-800 dark:bg-[#111921]'
+      >
+        <div className='mx-auto max-w-[1440px]'>
+          <div className='mb-16 text-center'>
+            <h2 className='mb-4 text-3xl font-bold text-[#111418] lg:text-4xl dark:text-white'>
+              Our Services
+            </h2>
+            <div className='bg-primary mx-auto mb-6 h-1 w-16'></div>
+            <p className='mx-auto max-w-2xl text-gray-500 dark:text-gray-400'>
+              Providing a bespoke real estate experience tailored to your unique
+              objectives and lifestyle.
+            </p>
+          </div>
+          <div className='grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-20'>
+            {servicesDummy.map((service, index) => (
+              <ServiceCard
+                key={index}
+                icon={iconMap[service.iconName as keyof typeof iconMap]}
+                title={service.title}
+                description={service.description}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section
+        id='testimonials'
+        className='bg-gray-50 px-6 py-24 lg:px-40 dark:bg-gray-900'
+      >
+        <div className='mx-auto max-w-[1440px]'>
+          <div className='mb-16 text-center'>
+            <h2 className='mb-4 text-3xl font-bold text-[#111418] lg:text-4xl dark:text-white'>
+              Client Testimonials
+            </h2>
+            <div className='bg-primary mx-auto mb-6 h-1 w-16'></div>
+            <p className='mx-auto max-w-2xl text-gray-500 dark:text-gray-400'>
+              Hear what our satisfied clients have to say about their experience
+              working with us.
+            </p>
+          </div>
+          <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            {testimonialDummy.map((testimonial, index) => (
+              <TestimonialCard
+                key={index}
+                rating={testimonial.rating}
+                quote={testimonial.quote}
+                authorName={testimonial.authorName}
+                authorTitle={testimonial.authorTitle}
+                avatar={testimonial.avatar}
+              />
+            ))}
           </div>
         </div>
       </section>
