@@ -10,19 +10,23 @@ import {
   RiSpeedLine,
   RiDownloadLine,
 } from '@remixicon/react';
+import { lazy, Suspense } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LoadingSkeleton from '@/components/common/LoadingSkeleton';
 import profile from '@/assets/profile.webp';
 import the_ridge from '@/assets/compliance/the_ridge.png';
 import equal_housing from '@/assets/compliance/equal_housing.png';
 import realtor from '@/assets/compliance/realtor.jpg';
 import pahrump from '@/assets/compliance/pahrump.jpg';
 import featured_property from '@/assets/house3.jpg';
-import PropertyCard from '@/components/PropertyCard';
+const PropertyCard = lazy(() => import('@/components/PropertyCard'));
 import ServiceCard from '@/components/ServiceCard';
-import TestimonialCard from '@/components/TestimonialCard';
+const TestimonialSection = lazy(
+  () => import('@/components/layout/TestimonialSection'),
+);
 import MarketStatCard from '@/components/MarketStatCard';
 import ShowcaseCard from '@/components/ShowcaseCard';
-import { testimonialDummy } from '@/data/testimonialDummy';
+
 import { servicesDummy } from '@/data/servicesDummy';
 import { propertiesDummy } from '@/data/propertiesDummy';
 import { marketStatsDummy } from '@/data/marketStatsDummy';
@@ -157,7 +161,12 @@ export default function Home() {
           </div>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
             {propertiesDummy.map((property, index) => (
-              <PropertyCard key={index} {...property} />
+              <Suspense
+                key={index}
+                fallback={<LoadingSkeleton variant='card' />}
+              >
+                <PropertyCard {...property} />
+              </Suspense>
             ))}
           </div>
         </div>
@@ -253,35 +262,33 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section
-        id='testimonials'
-        className='bg-gray-50 px-6 py-24 lg:px-40 dark:bg-[#111921]'
+      <Suspense
+        fallback={
+          <section
+            id='testimonials'
+            className='bg-gray-50 px-6 py-24 lg:px-40 dark:bg-[#111921]'
+          >
+            <div className='mx-auto max-w-[1440px]'>
+              <div className='mb-16 text-center'>
+                <div className='mx-auto mb-4 h-10 w-64 rounded bg-gray-200 dark:bg-gray-700'></div>
+                <div className='mx-auto mb-6 h-1 w-16 rounded bg-gray-200 dark:bg-gray-700'></div>
+                <div className='mx-auto h-4 w-96 rounded bg-gray-200 dark:bg-gray-700'></div>
+              </div>
+              <div className='relative overflow-hidden py-6'>
+                <div className='flex gap-6'>
+                  {[...Array(4)].map((_, index) => (
+                    <div key={index} className='w-80 shrink-0'>
+                      <LoadingSkeleton variant='card' />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        }
       >
-        <div className='mx-auto max-w-[1440px]'>
-          <div className='mb-16 text-center'>
-            <h2 className='mb-4 text-3xl font-bold text-[#111418] lg:text-4xl dark:text-white'>
-              Client Testimonials
-            </h2>
-            <div className='bg-primary mx-auto mb-6 h-1 w-16'></div>
-            <p className='mx-auto max-w-2xl text-gray-500 dark:text-gray-400'>
-              Hear what our satisfied clients have to say about their experience
-              working with us.
-            </p>
-          </div>
-          <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {testimonialDummy.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                rating={testimonial.rating}
-                quote={testimonial.quote}
-                authorName={testimonial.authorName}
-                authorTitle={testimonial.authorTitle}
-                avatar={testimonial.avatar}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+        <TestimonialSection />
+      </Suspense>
       <section
         id='market-stats'
         className='bg-gray-50 px-6 py-24 lg:px-40 dark:bg-[#111921]'
