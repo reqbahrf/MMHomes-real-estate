@@ -10,7 +10,7 @@ import {
   RiSpeedLine,
   RiDownloadLine,
 } from '@remixicon/react';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LoadingSkeleton from '@/components/common/LoadingSkeleton';
 import profile from '@/assets/profile.webp';
@@ -45,6 +45,50 @@ const marketIconMap = {
 };
 
 export default function Home() {
+  useEffect(() => {
+    document.title = 'MM Homes - Premier Real Estate Services';
+
+    const updateMetaTag = (name: string, content: string) => {
+      let meta =
+        document.querySelector(`meta[name="${name}"]`) ||
+        document.querySelector(`meta[property="${name}"]`);
+
+      if (!meta) {
+        meta = document.createElement('meta');
+        if (name.startsWith('og:')) {
+          meta.setAttribute('property', name);
+        } else {
+          meta.setAttribute('name', name);
+        }
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    updateMetaTag(
+      'description',
+      'Experience a curated approach to buying and selling premier properties. We combine market intelligence with an exclusive network to find your perfect home.',
+    );
+    updateMetaTag('og:title', 'MM Homes - Premier Real Estate Services');
+    updateMetaTag(
+      'og:description',
+      'Experience a curated approach to buying and selling premier properties. We combine market intelligence with an exclusive network to find your perfect home.',
+    );
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:image', featured_property);
+    updateMetaTag('og:site_name', 'MM Homes');
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', 'MM Homes - Premier Real Estate Services');
+    updateMetaTag(
+      'twitter:description',
+      'Experience a curated approach to buying and selling premier properties.',
+    );
+    updateMetaTag('twitter:image', featured_property);
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <section
